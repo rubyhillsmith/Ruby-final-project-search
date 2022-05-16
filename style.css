@@ -1,0 +1,11 @@
+body {
+  background-color: #dcd0ff;
+}
+
+font {
+ font-family: 'Arvo', serif;
+}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arvo&family=Source+Code+Pro:ital,wght@1,200&display=swap" rel="stylesheet">

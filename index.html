@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Source+Code+Pro:ital,wght@1,200&display=swap" rel="stylesheet">
+
+
+    <title>Search!</title>
+
+    <meta name="description" content="Ruby's Project." />
+    <!-- styles -->
+    <style>
+      #text-wrapper {
+        padding: 3px 0;
+      }
+      div > div {
+        color: black;
+        padding: 3px 0;
+      }
+      button {
+        display: block;
+        margin-top: 10px;
+        width: 10%;
+      }
+      body {
+        font-family: 'Arvo', serif;'
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Search!</h1>
+    <input id="text-input" /><button id="random-button">I'm Feeling Lucky!</button>
+    <div id="text-wrapper"></div>
+    <!-- script -->
+    <script>
+      const textWrapper = document.getElementById("text-wrapper");
+      const textInput = document.getElementById("text-input");
+      const randomButton = document.getElementById("random-button");
+      const words = [
+        "A child’s red cardigan draped over a park bench like an open wound",
+        "A kind of respite",
+        "A pamphlet telling me to live my Christian truth",
+        "A wheelie bin rolling along cracked pavement mimics the sound of thunder",
+        "All is forgiven",
+        "And even here I feel the need to rescript the denouement",
+        "And now for rebuttal there is only the poem (oops)",
+        "And the lovesong in the ending, and the humour in the leaving",
+        "As if you had all the time to heal the world",
+        "As scary as an Olympic pool at midnight",
+        "At any moment the key could turn up in the pocket of an old jacket",
+        "Back when we liked what we had",
+        "Become a hero and inspire your peers",
+        "Betting money against the importance of my own ideas",
+        "Bore holes through one another – like stars – delight in the exterior world – for a moment – then back to sex –",
+        "Boyfriends are like unsatisfying political systems (in that we’re told it’s safer to reform than overthrow)",
+        "Busy day spent trying to remember my favourite colour and song",
+        "Calling my mum ‘teacher’ by accident",
+        "Calling my teacher ‘mum’ by accident",
+        "Can you level an opinion if you’re not feeling very level",
+        "Can you project a vision when you’ve lost control of its furthest edges",
+        "Cleaning routine for emotional filth",
+        "Clothes grow tight",
+        "Could I have held you better",
+        "Could use a friend",
+        "Death tarot card again today – hmm – your figure in gunmetal armour –",
+        "Didn’t really notice how it felt",
+        "Discourse for mutants",
+        "’Do you see value in a text that is impossible to penetrate’",
+        "Doing good things – thinking you’re doing good things – doing good things – thinking you’re doing good things –",
+        "Don’t just stand there!",
+        "Don’t wanna be the only one who fantasises",
+        "Draw your centre closer to the ground",
+        "Enter breathing, try to forget",
+        "Exit the party with a memorable quip – you’ve waited years for this moment –",
+        "Extracting a physical token from the mythic",
+        "Extracting the energy of the ocean (gulp gulp)",
+        "Feeling such discomfort in receiving — and, oh no – needing to receive to live –",
+        "Feeling very much like a diva this evening",
+        "Feigning disinterest in the chatter of the now",
+        "Fever, search the dark for the red half-moon of the Kmart fan heater",
+        "Fondle the off-season avocados – all 30 are still rock-hard – reminder – a predicted outcome can cause just as much pain –",
+        "Found a different life – now I’ll take a photo of the sunset every time –",
+        "Give me my freaking transitional object",
+        "God bless you guys",
+        "Habit tracking for terrible people",
+        "Hallucinating hidden cameras – unpack the element of narcissism here – or not – pose –",
+        "Handle items of lost property with a fair amount of tenderness",
+        "Having made some progress",
+        "He is aware of what makes a good story – he studied journalism –",
+        "How could I forget",
+        "I am not a fool",
+        "I am suddenly estranged from the group chat",
+        "I am untangling a three-year-old lover’s knot",
+        "I brush my hair to hear the waves",
+        "I did it for my disgusting body, and for the corporate self-care movement",
+        "I didn't resent you for spending time with others, I resented that I couldn't do the same",
+        "I get a popup message saying that ‘a data breach on a site or app exposed your password’",
+        "I get it, finally",
+        "I get to hear the old school bus rattling my window like a death knell",
+        "I have a legal obligation to thoroughly entertain each intrusive thought",
+        "I just don’t remember it ever being quite this dark",
+        "I powerwalk until I feel adequate",
+        "I shall go out and make public statements I shall regret them terribly",
+        "I spent a few good years coiled up like a silver chain on someone’s bedside table",
+        "I tell the dog ‘I do not judge myself for being human’ – of course there’s some uncertainty here –",
+        "I will be soft and fond, even when you try to kill me",
+        "I will counter that I tried so hard",
+        "I’d like to come back from this one day",
+        "I’ll do it first thing in the morning",
+        "I’m so sorry",
+        "Injury of fright",
+        "Is forever just something we say to each other yes obviously loser",
+        "It was as if we set out to crush each other it was as if",
+        "It’s been a while since love did right by me",
+        "It’s quite easy to forget who cares for you – too many ins and outs –",
+        "Jogging down Pin Oak Crescent, dried leaves catching in the laces of my Adidas Superstars",
+        "Joke's on you",
+        "Kill the light, lie wide asleep",
+        "Let’s find a way around this!",
+        "Let’s not sidestep the ethical component",
+        "Letting good ideas fall into the hands of insignificant men",
+        "Life is torment and I am insane!",
+        "Like pouring words down the sink",
+        "Maybe for a moment – you were just a coward – you know I’m more than okay with that –",
+        "Maybe it will trigger something human in her",
+        "Meditation for 100 million corpses",
+        "Meditation for chronic disgust",
+        "Meditation for two mouths",
+        "Museum of touch",
+        "Mutual self-righteousness",
+        "My Grandma laments that someone has stolen her Scrabble dictionary",
+        "My new neighbourhood is festooned with roses – hordes of residents – must share my habit – of nose-diving into them – I wonder how this activity rates – on a COVID safety scale –",
+        "Nature always wins",
+        "Neurotics like us",
+        "No I don’t want to come to your rock-climbing birthday party, you’re 25 years old",
+        "No promises here",
+        "Nobody’s fault, not even my own",
+        "Oh I know exactly what I’d do if I wasn’t so afraid",
+        "Overcoats hung in/around my house like ghosts",
+        "Pregnant cat saunters across fresh-laid council cement",
+        "Parentheses like sets of (open arms), like (((rolls of belly fat)))",
+        "Patience as a currency",
+        "Permission to go crazy",
+        "Pry open in the event of pain",
+        "Quotes about subjectivity",
+        "Reckon you’re listening to mopey songs ‘bout how you would have given me anything",
+        "Rehearsing for a show that never comes",
+        "Researching the ethics of talking shit in poems",
+        "Resent the process",
+        "Scream for you",
+        "Seeing 1030 kilometres of silk, unravelling –",
+        "Seeing mechanisms of energy and resistance",
+        "Seeing the way in which the sunset bandages the sky – like get well soon –",
+        "So little to know or notice after all",
+        "So many things were wrong",
+        "Sometimes I am surprised by what I can do on my own",
+        "Sometimes I worry that my collectible animal figurines are feuding with each other",
+        "Sometimes it’s amusing to approach things you’ve known for years as if they’re sudden revelations",
+        "Splitting a tab of Lamictal with my psychiatrist to celebrate #WorldMentalHealthDay",
+        "Stifled by how much I want to love",
+        "Still, this obsession with pathology",
+        "Strange is morning",
+        "Suddenly unable to navigate a crowded aisle",
+        "The Next Step evades me like a sensible dinner",
+        "The heart has been picked clean, the pan soaks in the sink",
+        "The hidden elements of illness made public – the everlasting sweat – the unwelcome contour of my torso –",
+        "The mind is a ballroom, but more often an outhouse",
+        "The narrow reserve, the roving torchlight",
+        "The opposite of a poet is a boulder or an IKEA measuring tape",
+        "The poem is either an exorcism or a birthday party",
+        "The sick person as the forever-child",
+        "The thing that gets between us is my health",
+        "Then I realised I didn’t want to lie beside someone who didn’t care about the world",
+        "This is always missing",
+        "This is progress?",
+        "This will allow the fear to become less interesting over time",
+        "Tuesday, peak hour – parting Swanston Street – your double-scoop of ice cream travels down your shirt-sleeve – you understand yourself as a spectacle –",
+        "Turning it off and on again",
+        "Two years on, this memory handed to me like a hot pan, like a blessing –",
+        "Undercut the psychoanalytic concepts – before they jump all over me – before they mark me with their slobber –",
+        "We never find each other in our dreams the way we say we will",
+        "Wear it until it falls right off",
+        "What a relief – some moments are just too sad to transform –",
+        "When the world loses its humour, and distance is a gentleness –",
+        "When your grandma guides you through the shopping centre by the crook of your elbow",
+        "Won’t forget – for a while – what we did best – was hurt each other –",
+        "Writers and taxidermists share a professional ethos",
+        "X Æ A-12 pronunciation",
+        "X mark to signify the concept of negation",
+        "Yes I crave the feeling of poetry I crave the flying",
+        "You always looked so awkward on the dancefloor – I’d feel the urge to tear right through the throng of bodies just to hold you –",
+        "You know I frighten easily",
+        "You said I didn’t try my hardest (– you really said it) –",
+        "You think the pain from the old world is gone forever",
+        "You were doing the best you could with the tools you had at the time (butter knife / stolen gel pen / roll of masking tape)",
+        "You’ll always leave a lamp on – but never more than this –",
+        "Your mouth was purple",
+        "Zero chance that this is happening all over again that this is happening all over again that this is happening all over again that this is happening all over again that this is happening all over again that this is happening all over again that this is happening all over again that this is happening all over again that this is happening all over again that this is happening all over again that this is happening all over again right promise",
+        "Zones of regulation and development",
+       
+      ];
+
+      const taggedLines = {
+        nature: [
+          "Extracting the energy of the ocean (gulp gulp)",
+          "I brush my hair to hear the waves",
+          "My new neighborhood is festooned with roses – I wonder who – before me – had a habit of nosediving into them – I wonder how this activity rates – on a COVID safety scale",
+          "Seeing the way in which the sunset bandages the sky",
+          "The way that an empty wheelie bin rolling along cracked pavement mimics the sound of thunder",
+          "Writers and taxidermists share a professional ethic",
+        ],
+        body: [
+          "Death tarot card again today – uh oh – your figure in gunmetal armour",
+          "I did it for my disgusting body, and for the corporate self-care movement",
+          "I spent a few good years coiled up like a silver chain on someone’s bedside",
+          "I will be soft and fond, even when you try to kill me",
+          "It was as if we set out to crush each other it was as if",
+          "No I don’t want to come to your rock-climbing birthday party, you’re 25",
+          "Museum of touch",
+          "Parentheses like sets of (open arms), like (((rolls of belly fat)))",
+          "Splitting a tab of Lamictal with my psychiatrist to celebrate #WorldMentalHealthDay",
+          "Still, this obsession with pathology",
+          "The heart has been picked clean, the tray soaks in the sink",
+          "The hidden elements of illness made public – the everlasting sweat – the unwelcome contour of my torso",
+          "Then I realised I didn’t want to lie beside someone who didn’t care about the world",
+          "When your grandma guides you by the crook of your elbow",
+          "Yes I crave the feeling of poetry I crave the flying",
+          "You always looked so awkward on the dancefloor – I’d feel the urge to tear right through the throng of bodies just to hold you",
+          "Your mouth was stained purple",
+        ],
+      };
+      function getRandomFromList(list) {
+        return list[Math.floor(Math.random() * list.length)];
+      }
+      function changeText(e) {
+        let resultWords = words.filter((word) =>
+          word.toLowerCase().startsWith(e.target.value.toLowerCase())
+        );
+        if (e.target.value.toLowerCase() in taggedLines) {
+          resultWords.push(...taggedLines[e.target.value.toLowerCase()]);
+        }
+
+        // clear exist words
+        while (textWrapper.firstChild) {
+          textWrapper.removeChild(textWrapper.firstChild);
+        }
+        for (var i = 0; i < resultWords.length; i++) {
+          const line = document.createElement("div");
+          line.innerHTML = resultWords[i];
+          textWrapper.appendChild(line);
+        }
+      }
+      function showRandomLine() {
+        let text = getRandomFromList(words);
+        const line = document.createElement("div");
+        textInput.value = "";
+        while (textWrapper.firstChild) {
+          textWrapper.removeChild(textWrapper.firstChild);
+        }
+        line.innerHTML = text;
+        textWrapper.appendChild(line);
+      }
+
+      textInput.addEventListener("input", changeText);
+      randomButton.addEventListener("click", showRandomLine);
+    </script>
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div
+      class="glitchButton"
+      style="position: fixed; top: 20px; right: 20px"
+    ></div>
+    <script src="https://button.glitch.me/button.js" defer></script>
+  </body>
+</html>
+
+<link rel="stylesheet" href="style.css">
+
