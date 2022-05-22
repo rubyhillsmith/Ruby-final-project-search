@@ -25,7 +25,7 @@
       button {
         display: block;
         margin-top: 10px;
-        width: 10%;
+        width: 200px;
       }
       body {
         font-family: 'Arvo', serif;'
@@ -33,7 +33,9 @@
     </style>
   </head>
   <body>
-    <h1>Search!</h1>
+<img src= "https://cdn.glitch.global/9a3b8bea-2300-449d-8b2b-1cefc077dcca/wordart.png?v=1652691019316"
+     width="30%">
+    <br>
     <input id="text-input" /><button id="random-button">I'm Feeling Lucky!</button>
     <div id="text-wrapper"></div>
     <!-- script -->
@@ -52,9 +54,9 @@
         "And the lovesong in the ending, and the humour in the leaving",
         "As if you had all the time to heal the world",
         "As scary as an Olympic pool at midnight",
-        "At any moment the key could turn up in the pocket of an old jacket",
+        "At any moment the key will turn up in the pocket of an old jacket",
         "Back when we liked what we had",
-        "Become a hero and inspire your peers",
+        "Become a hero and inspire your peers!",
         "Betting money against the importance of my own ideas",
         "Bore holes through one another – like stars – delight in the exterior world – for a moment – then back to sex –",
         "Boyfriends are like unsatisfying political systems (in that we’re told it’s safer to reform than overthrow)",
@@ -70,20 +72,19 @@
         "Death tarot card again today – hmm – your figure in gunmetal armour –",
         "Didn’t really notice how it felt",
         "Discourse for mutants",
-        "’Do you see value in a text that is impossible to penetrate’",
         "Doing good things – thinking you’re doing good things – doing good things – thinking you’re doing good things –",
         "Don’t just stand there!",
         "Don’t wanna be the only one who fantasises",
         "Draw your centre closer to the ground",
         "Enter breathing, try to forget",
-        "Exit the party with a memorable quip – you’ve waited years for this moment –",
+        "Exit the party with a memorable quip – somehow you’ve waited years for this –",
         "Extracting a physical token from the mythic",
         "Extracting the energy of the ocean (gulp gulp)",
         "Feeling such discomfort in receiving — and, oh no – needing to receive to live –",
         "Feeling very much like a diva this evening",
         "Feigning disinterest in the chatter of the now",
         "Fever, search the dark for the red half-moon of the Kmart fan heater",
-        "Fondle the off-season avocados – all 30 are still rock-hard – reminder – a predicted outcome can cause just as much pain –",
+        "Fondle the out-of-season nectarines – all 30 are still rock-hard – reminder – a predicted outcome can cause just as much heartbreak –",
         "Found a different life – now I’ll take a photo of the sunset every time –",
         "Give me my freaking transitional object",
         "God bless you guys",
@@ -101,7 +102,6 @@
         "I didn't resent you for spending time with others, I resented that I couldn't do the same",
         "I get a popup message saying that ‘a data breach on a site or app exposed your password’",
         "I get it, finally",
-        "I get to hear the old school bus rattling my window like a death knell",
         "I have a legal obligation to thoroughly entertain each intrusive thought",
         "I just don’t remember it ever being quite this dark",
         "I powerwalk until I feel adequate",
@@ -110,9 +110,10 @@
         "I tell the dog ‘I do not judge myself for being human’ – of course there’s some uncertainty here –",
         "I will be soft and fond, even when you try to kill me",
         "I will counter that I tried so hard",
-        "I’d like to come back from this one day",
-        "I’ll do it first thing in the morning",
-        "I’m so sorry",
+        "I'd hear the old school bus rattling my window like a death knell",
+        "I'd like to come back from this one day",
+        "I'll do it first thing in the morning",
+        "I'm so sorry",
         "Injury of fright",
         "Is forever just something we say to each other yes obviously loser",
         "It was as if we set out to crush each other it was as if",
@@ -238,9 +239,14 @@
         return list[Math.floor(Math.random() * list.length)];
       }
       function changeText(e) {
-        let resultWords = words.filter((word) =>
-          word.toLowerCase().startsWith(e.target.value.toLowerCase())
-        );
+        let resultWords = [];
+        
+        if (e.target.value.toLowerCase() != "") {
+          resultWords = words.filter((word) =>
+            word.toLowerCase().startsWith(e.target.value.toLowerCase())
+          );
+        }
+        
         if (e.target.value.toLowerCase() in taggedLines) {
           resultWords.push(...taggedLines[e.target.value.toLowerCase()]);
         }
@@ -256,26 +262,28 @@
         }
       }
       function showRandomLine() {
-        let text = getRandomFromList(words);
-        const line = document.createElement("div");
-        textInput.value = "";
         while (textWrapper.firstChild) {
           textWrapper.removeChild(textWrapper.firstChild);
         }
-        line.innerHTML = text;
-        textWrapper.appendChild(line);
+        let listOfWords = Array.from(words);
+        for (var i = 0; i < 5; i++){
+          let text = getRandomFromList(listOfWords);
+          let index = listOfWords.indexOf(text);
+          if (index !== -1) {
+            listOfWords.splice(index, 1);
+          }
+          const line = document.createElement("div");
+          textInput.value = "";
+          line.innerHTML = text;
+          textWrapper.appendChild(line);
+        }
       }
 
       textInput.addEventListener("input", changeText);
       randomButton.addEventListener("click", showRandomLine);
     </script>
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div
-      class="glitchButton"
-      style="position: fixed; top: 20px; right: 20px"
-    ></div>
-    <script src="https://button.glitch.me/button.js" defer></script>
+
+    
   </body>
 </html>
 
