@@ -1,3 +1,5 @@
-# Change text on input
+# SearchVerse3000
 
-An empty webpage for HTML/CSS/JavaScript exercises.
+## Ruby's final project
+
+https://searchverse3000.netlify.app/
