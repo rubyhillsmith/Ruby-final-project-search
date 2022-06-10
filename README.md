@@ -1,4 +1,4 @@
-# SearchVerse3000
+# searchverse3000
 
 ## Ruby's final project
 
